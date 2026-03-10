@@ -30,9 +30,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${nanumSquare.className} min-h-screen`}>
+      <body className={`${nanumSquare.className}`}>
         <Header />
-        <main className="max-w-[1200px] mx-auto">{children}</main>
+        <main className="max-w-[1200px] mx-auto py-6">{children}</main>
       </body>
     </html>
   );
