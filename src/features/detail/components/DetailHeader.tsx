@@ -1,24 +1,35 @@
 import Image from "next/image";
+import { toggleTodo } from "../../home/api/todoApi";
 
-// 상세 조회 응답 타입
-interface Todo {
-  id: number;
+interface PropsType {
   name: string;
-  memo: string | null;
-  imageUrl: string | null;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+  id: number;
   isCompleted: boolean;
-  tenantId: string;
 }
-const DetailHeader = ({ todo }: { todo: Todo }) => {
+
+const DetailHeader = ({ name, setName, id, isCompleted }: PropsType) => {
+  const isCheckbox = isCompleted
+    ? "/images/icons/completedCheckboxIcon.svg"
+    : "/images/icons/checkboxIcon.svg";
+  const HeaderCss = isCompleted ? "bg-violet-100" : "bg-white";
+
+  const handleToggle = async () => {
+    await toggleTodo(id, !isCompleted);
+  };
+
   return (
-    <div className="flex items-center justify-center gap-4 border-2 border-slate-900 rounded-3xl py-4 mb-6">
-      <Image
-        src="/images/icons/checkboxIcon.svg"
-        width={32}
-        height={32}
-        alt="checkbox"
-      />
-      <h1 className="underline font-bold">{todo.name}</h1>
+    <div
+      className={`flex items-center justify-center gap-4 border-2 border-slate-900 rounded-3xl py-4 mb-6 ${HeaderCss}`}
+    >
+      <button onClick={handleToggle}>
+        <Image src={isCheckbox} width={32} height={32} alt="checkbox" />
+      </button>
+      <input
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className="bg-transparent outline-none border-none underline font-bold"
+      ></input>
     </div>
   );
 };

@@ -17,11 +17,13 @@ const Button = ({
   isCompleted,
   onClick,
 }: ButtonProps) => {
+
   const variantStyle = {
     primary: isCompleted ? "text-white bg-violet-600" : "bg-slate-200",
-    secondary: isCompleted ? "text-white bg-lime-300" : "bg-slate-200",
+    secondary: isCompleted ? "bg-lime-300" : "bg-slate-200",
     danger: "text-white bg-rose-500",
   };
+  
   return (
     <button
       type={type}

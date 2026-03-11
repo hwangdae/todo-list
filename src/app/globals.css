@@ -23,6 +23,25 @@ body {
   top: 2px;
   left: 2px;
   border-radius: 24px;
-  background: #0F172A;
+  background: #0f172a;
   z-index: -1;
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 45px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #fde68a;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #fde68a;
 }
