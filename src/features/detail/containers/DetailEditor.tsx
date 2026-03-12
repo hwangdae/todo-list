@@ -16,6 +16,9 @@ interface Todo {
 
 const DetailEditor = ({ todo }: { todo: Todo }) => {
   const [name, setName] = useState(todo.name);
+  const [memo, setMemo] = useState(todo.memo);
+  const [file, setFile] = useState<File | null>(null);
+
   return (
     <div className="h-full bg-white py-6 px-25.5">
       <DetailHeader
@@ -25,10 +28,17 @@ const DetailEditor = ({ todo }: { todo: Todo }) => {
         isCompleted={todo.isCompleted}
       />
       <div className="flex gap-6 mb-6">
-        <ImageUploadBox />
-        <MemoSection />
+        <ImageUploadBox imageUrl={todo.imageUrl} setFile={setFile} />
+        <MemoSection memo={memo} setMemo={setMemo} />
       </div>
-      <ActionButton id={todo.id} isCompleted={todo.isCompleted} />
+      <ActionButton
+        id={todo.id}
+        isCompleted={todo.isCompleted}
+        name={name}
+        memo={memo}
+        imageUrl={todo.imageUrl}
+        file={file}
+      />
     </div>
   );
 };

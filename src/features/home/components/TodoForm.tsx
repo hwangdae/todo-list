@@ -6,7 +6,6 @@ import Button from "@/src/components/ui/Button";
 
 const TodoForm = () => {
   const [todo, setTodo] = useState("");
-
   // 항목 등록
   const todoSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

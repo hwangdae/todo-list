@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { toggleTodo } from "../../home/api/todoApi";
+import { useRouter } from "next/navigation";
 
 interface PropsType {
   name: string;
@@ -9,6 +10,7 @@ interface PropsType {
 }
 
 const DetailHeader = ({ name, setName, id, isCompleted }: PropsType) => {
+  const router = useRouter();
   const isCheckbox = isCompleted
     ? "/images/icons/completedCheckboxIcon.svg"
     : "/images/icons/checkboxIcon.svg";
@@ -16,6 +18,7 @@ const DetailHeader = ({ name, setName, id, isCompleted }: PropsType) => {
 
   const handleToggle = async () => {
     await toggleTodo(id, !isCompleted);
+    router.refresh();
   };
 
   return (
