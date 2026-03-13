@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import { addTodo } from "../api/todoApi";
 import AddTodoIcon from "@/public/images/icons/addTodoIcon.svg";
 import Button from "@/src/components/ui/Button";
+import { useRouter } from "next/navigation";
 
-const TodoForm = () => {
+const TodoForm = ({ todosLength }: { todosLength: number }) => {
   const [todo, setTodo] = useState("");
+  const router = useRouter();
 
   // 항목 등록
   const todoSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -17,6 +19,8 @@ const TodoForm = () => {
 
     try {
       await addTodo(todo);
+      alert("할 일 등록이 완료되었습니다.");
+      router.refresh();
       setTodo("");
     } catch (err) {
       console.log(err);
@@ -37,6 +41,7 @@ const TodoForm = () => {
         type="submit"
         icon={<AddTodoIcon fill="#0F172A" />}
         hideTextOnMobile={true}
+        isCompleted={todosLength === 0}
       >
         추가하기
       </Button>

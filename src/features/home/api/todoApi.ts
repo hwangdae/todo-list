@@ -7,10 +7,16 @@ const api = axios.create({
   },
 });
 
+interface TodoResponse {
+  id: number;
+  name: string;
+  isCompleted: boolean;
+}
+
 // 항목 목록 조회
-export const getTodos = async () => {
-  const res = await api.get("/items");
-  return res.data;
+export const getTodos = async (): Promise<TodoResponse[]> => {
+  const { data } = await api.get<TodoResponse[]>("/items");
+  return data;
 };
 
 // 항목 등록

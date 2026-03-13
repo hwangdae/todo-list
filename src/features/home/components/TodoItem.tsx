@@ -25,6 +25,7 @@ const TodoItem = ({ todo }: Props) => {
 
   const handleToggle = async () => {
     await toggleTodo(todo.id, !todo.isCompleted);
+    router.refresh();
   };
 
   return (
