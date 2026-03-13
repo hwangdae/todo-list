@@ -17,7 +17,12 @@ export const deleteTodo = async (id: number) => {
 // Todo 업데이트
 export const updateTodo = async (
   id: number,
-  data: { name: string; memo: string | null; imageUrl: string | null },
+  data: {
+    name: string;
+    memo: string | null;
+    imageUrl: string | null;
+    isCompleted: boolean;
+  },
 ) => {
   try {
     const res = await api.patch(`/items/${id}`, data);
