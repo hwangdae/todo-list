@@ -26,6 +26,7 @@ const ImageUploadBox = ({ imageUrl, setFile }: PropsType) => {
     inputRef.current?.click();
   };
 
+  // 업로드 이미지 선택 
   const handleChangeImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;

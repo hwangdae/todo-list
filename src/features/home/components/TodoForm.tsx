@@ -6,6 +6,7 @@ import Button from "@/src/components/ui/Button";
 
 const TodoForm = () => {
   const [todo, setTodo] = useState("");
+
   // 항목 등록
   const todoSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,7 +25,7 @@ const TodoForm = () => {
 
   return (
     <form className="flex gap-4 mb-10" onSubmit={todoSubmit}>
-      <div className="flex-1 bg-[url('/images/etc/search.png')] bg-no-repeat bg-contain p-4">
+      <div className="flex items-center min-h-14 flex-1 p-4 border-2 border-slate-900 bg-slate-100 rounded-3xl shadow-[4px_3px_0px_#0F172A]">
         <input
           placeholder="할 일을 입력해주세요"
           value={todo}
@@ -32,7 +33,11 @@ const TodoForm = () => {
           className="bg-transparent outline-none w-full px-2"
         />
       </div>
-      <Button type="submit" icon={<AddTodoIcon fill="#0F172A" />}>
+      <Button
+        type="submit"
+        icon={<AddTodoIcon fill="#0F172A" />}
+        hideTextOnMobile={true}
+      >
         추가하기
       </Button>
     </form>

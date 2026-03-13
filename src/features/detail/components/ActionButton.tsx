@@ -28,10 +28,10 @@ const ActionButton = ({
     let finalImageUrl = imageUrl;
 
     if (file) {
-      const res = await uploadImage(file); // 여기서 file은 File로 좁혀짐
+      const res = await uploadImage(file);
       finalImageUrl = res.url;
     }
-    console.log(finalImageUrl,"<======이미지 URL")
+
     await updateTodo(id, {
       name,
       memo,
