@@ -24,7 +24,7 @@ const ActionButton = ({
   file,
 }: ActionButtonProps) => {
   const router = useRouter();
-  const handleSave = async () => {
+  const handleUpdate = async () => {
     let finalImageUrl = imageUrl;
 
     if (file) {
@@ -37,22 +37,24 @@ const ActionButton = ({
       memo,
       imageUrl: finalImageUrl,
     });
+    alert("수정이 완료되었습니다.");
     router.push("/");
     router.refresh();
   };
 
   const handleDelete = async () => {
     await deleteTodo(id);
+    alert("삭제 되었습니다.");
     router.push("/");
     router.refresh();
   };
 
   return (
-    <div className="flex gap-4 justify-end">
+    <div className="flex gap-4 justify-center desktop:justify-end">
       <Button
         variant="secondary"
         icon={<EditCompletedIcon />}
-        onClick={handleSave}
+        onClick={handleUpdate}
         isCompleted={isCompleted}
       >
         수정완료

@@ -20,14 +20,14 @@ const DetailEditor = ({ todo }: { todo: Todo }) => {
   const [file, setFile] = useState<File | null>(null);
 
   return (
-    <div className="h-full bg-white py-6 px-25.5">
+    <div className="h-full bg-white py-6 detail-container-padding">
       <DetailHeader
         name={name}
         setName={setName}
         id={todo.id}
         isCompleted={todo.isCompleted}
       />
-      <div className="flex gap-6 mb-6">
+      <div className="flex flex-col mb-6 gap-6 desktop:flex-row">
         <ImageUploadBox imageUrl={todo.imageUrl} setFile={setFile} />
         <MemoSection memo={memo} setMemo={setMemo} />
       </div>

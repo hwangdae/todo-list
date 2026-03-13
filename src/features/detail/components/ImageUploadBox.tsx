@@ -50,7 +50,7 @@ const ImageUploadBox = ({ imageUrl, setFile }: PropsType) => {
 
   return (
     <div className="relative right-0 bottom-0">
-      <div className="flex items-center justify-center w-[384px] h-[311px] border-dashed border-2 border-slate-300 rounded-3xl bg-slate-50 overflow-hidden">
+      <div className="flex items-center justify-center w-full desktop:w-[384px] h-[311px] border-dashed border-2 border-slate-300 rounded-3xl bg-slate-50 overflow-hidden">
         {preview ? (
           <Image
             src={preview}

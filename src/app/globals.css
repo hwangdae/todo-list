@@ -7,9 +7,13 @@
   --breakpoint-desktop: 1200px;
 }
 
-/* 반응형 기본 패딩 */
+/* 반응형 전체 container 패딩 설정 */
 @utility container-padding {
   @apply px-4 tablet:px-6 desktop:px-0;
+}
+
+@utility detail-container-padding {
+  @apply px-4 tablet:px-6 desktop:px-25.5;
 }
 
 :root {

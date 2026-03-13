@@ -29,8 +29,8 @@ const Button = ({
     <button
       type={type}
       onClick={onClick}
-      className={`flex items-center justify-center gap-2 cursor-pointer font-bold
-      h-14 px-4.5 md:px-6
+      className={`flex flex-1 tablet:flex-none items-center justify-center gap-2 cursor-pointer font-bold
+      h-14 px-6
       border-2 border-slate-900 rounded-3xl
       shadow-[4px_3px_0px_#0F172A]
       ${variantStyle[variant]}`}

@@ -31,6 +31,7 @@ const DetailHeader = ({ name, setName, id, isCompleted }: PropsType) => {
       <input
         value={name}
         onChange={(e) => setName(e.target.value)}
+        size={name.length+2 || 1}
         className="bg-transparent outline-none border-none underline font-bold"
       ></input>
     </div>
