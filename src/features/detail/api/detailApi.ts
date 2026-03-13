@@ -1,18 +1,14 @@
+import { api } from "@/src/lib/api";
 import axios from "axios";
-
-const api = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_SERVER_API}`,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+import { DetailTodo } from "../types/detailTodo";
 
 // 상세 정보 조회
-export const getTodo = async (id: number) => {
-  const res = await api.get(`/items/${id}`);
+export const getTodo = async (id: number): Promise<DetailTodo> => {
+  const res = await api.get<DetailTodo>(`/items/${id}`);
   return res.data;
 };
 
+// 항목 삭제
 export const deleteTodo = async (id: number) => {
   const res = await api.delete(`/items/${id}`);
   return res.data;
@@ -31,15 +27,20 @@ export const updateTodo = async (
   }
 };
 
+// 이미지 업로드
 export const uploadImage = async (file: File) => {
   const formData = new FormData();
   formData.append("image", file);
 
-  const res = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_API}/images/upload`, formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
+  const res = await axios.post(
+    `${process.env.NEXT_PUBLIC_SERVER_API}/images/upload`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     },
-  });
+  );
 
   return res.data;
 };

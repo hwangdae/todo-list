@@ -1,22 +1,10 @@
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_SERVER_API}`,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
-
-interface TodoResponse {
-  id: number;
-  name: string;
-  isCompleted: boolean;
-}
+import { api } from "@/src/lib/api";
+import { Todo } from "../types/todo";
 
 // 항목 목록 조회
-export const getTodos = async (): Promise<TodoResponse[]> => {
-  const { data } = await api.get<TodoResponse[]>("/items");
-  return data;
+export const getTodos = async (): Promise<Todo[]> => {
+  const res = await api.get<Todo[]>("/items");
+  return res.data;
 };
 
 // 항목 등록

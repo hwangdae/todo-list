@@ -1,20 +1,14 @@
 "use client";
-
 import Image from "next/image";
 import { toggleTodo } from "../api/todoApi";
 import { useRouter } from "next/navigation";
+import { Todo } from "../types/todo";
 
-interface Todo {
-  id: number;
-  name: string;
-  isCompleted: boolean;
-}
-
-interface Props {
+interface PropsType {
   todo: Todo;
 }
 
-const TodoItem = ({ todo }: Props) => {
+const TodoItem = ({ todo }: PropsType) => {
   const router = useRouter();
 
   const isCheckbox = todo.isCompleted

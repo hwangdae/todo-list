@@ -2,12 +2,7 @@
 import Image from "next/image";
 import EmptyState from "./EmptyState";
 import TodoItem from "./TodoItem";
-
-interface Todo {
-  id: number;
-  name: string;
-  isCompleted: boolean;
-}
+import { Todo } from "../types/todo";
 
 interface PropsType {
   todos: Todo[];
