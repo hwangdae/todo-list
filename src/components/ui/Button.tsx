@@ -2,10 +2,11 @@ import React from "react";
 
 interface ButtonProps {
   type?: "button" | "submit" | "reset";
-  children: string;
+  children: React.ReactNode;
   icon?: React.ReactNode;
   variant?: "primary" | "secondary" | "danger";
   isCompleted?: boolean;
+  hideTextOnMobile?: boolean;
   onClick?: () => void;
 }
 
@@ -15,23 +16,31 @@ const Button = ({
   icon,
   variant = "primary",
   isCompleted,
+  hideTextOnMobile = false,
   onClick,
 }: ButtonProps) => {
-
   const variantStyle = {
     primary: isCompleted ? "text-white bg-violet-600" : "bg-slate-200",
     secondary: isCompleted ? "bg-lime-300" : "bg-slate-200",
     danger: "text-white bg-rose-500",
   };
-  
+
   return (
     <button
       type={type}
       onClick={onClick}
-      className={`flex items-center justify-center gap-2 btn-primary cursor-pointer font-bold w-42 h-14 border-2 border-slate-900 rounded-3xl shadow-[4px_3px_0px_#0F172A] ${variantStyle[variant]}`}
+      className={`flex flex-1 tablet:flex-none items-center justify-center gap-2 cursor-pointer font-bold
+      h-14 px-6
+      border-2 border-slate-900 rounded-3xl
+      shadow-[4px_3px_0px_#0F172A]
+      ${variantStyle[variant]}`}
     >
       {icon}
-      {children}
+      {hideTextOnMobile ? (
+        <span className="hidden md:inline">{children}</span>
+      ) : (
+        children
+      )}
     </button>
   );
 };

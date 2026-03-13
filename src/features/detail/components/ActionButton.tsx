@@ -24,35 +24,37 @@ const ActionButton = ({
   file,
 }: ActionButtonProps) => {
   const router = useRouter();
-  const handleSave = async () => {
+  const handleUpdate = async () => {
     let finalImageUrl = imageUrl;
 
     if (file) {
-      const res = await uploadImage(file); // 여기서 file은 File로 좁혀짐
+      const res = await uploadImage(file);
       finalImageUrl = res.url;
     }
-    console.log(finalImageUrl,"<======이미지 URL")
+
     await updateTodo(id, {
       name,
       memo,
       imageUrl: finalImageUrl,
     });
+    alert("수정이 완료되었습니다.");
     router.push("/");
     router.refresh();
   };
 
   const handleDelete = async () => {
     await deleteTodo(id);
+    alert("삭제 되었습니다.");
     router.push("/");
     router.refresh();
   };
 
   return (
-    <div className="flex gap-4 justify-end">
+    <div className="flex gap-4 justify-center desktop:justify-end">
       <Button
         variant="secondary"
         icon={<EditCompletedIcon />}
-        onClick={handleSave}
+        onClick={handleUpdate}
         isCompleted={isCompleted}
       >
         수정완료

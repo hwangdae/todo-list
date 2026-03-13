@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+/* breakpoint 설정 */
+@theme {
+  --breakpoint-mobile: 640px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1200px;
+}
+
+/* 반응형 전체 container 패딩 설정 */
+@utility container-padding {
+  @apply px-4 tablet:px-6 desktop:px-0;
+}
+
+@utility detail-container-padding {
+  @apply px-4 tablet:px-6 desktop:px-25.5;
+}
+
 :root {
   --background: #f9fafb;
   --foreground: #1e293b;
