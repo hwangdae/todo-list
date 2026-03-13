@@ -31,15 +31,20 @@ const ActionButton = ({
       const res = await uploadImage(file);
       finalImageUrl = res.url;
     }
-
-    await updateTodo(id, {
-      name,
-      memo,
-      imageUrl: finalImageUrl,
-    });
-    alert("수정이 완료되었습니다.");
-    router.push("/");
-    router.refresh();
+    try {
+      const res = await updateTodo(id, {
+        name,
+        memo: memo ?? "",
+        imageUrl: finalImageUrl ?? "",
+        isCompleted,
+      });
+      console.log(res);
+      alert("수정이 완료되었습니다.");
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+      alert("수정 실패. 다시 시도해 주세요.");
+    }
   };
 
   const handleDelete = async () => {

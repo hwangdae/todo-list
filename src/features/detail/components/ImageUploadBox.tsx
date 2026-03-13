@@ -62,14 +62,14 @@ const ImageUploadBox = ({ imageUrl, setFile }: PropsType) => {
         ) : imageUrl ? (
           <Image
             src={imageUrl}
-            alt="기존 이미지"
+            alt="Todo 업로드 이미지"
             width={384}
             height={311}
             className="object-cover w-full h-full"
           />
         ) : (
           <Image
-            src="/images/etc/image-upload.png"
+            src="/images/etc/noImage.svg"
             width={54}
             height={54}
             alt="업로드 이미지 없을 때"
