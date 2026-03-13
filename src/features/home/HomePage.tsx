@@ -6,7 +6,7 @@ const HomePage = async () => {
   const todos = await getTodos();
   return (
     <div className="pt-6 px-4 container-padding">
-      <TodoForm />
+      <TodoForm todosLength={todos.length}/>
       <div className="flex gap-12 flex-col lg:flex-row lg:gap-6">
         <TodoList todos={todos} isCompleted={false} />
         <TodoList todos={todos} isCompleted={true} />

@@ -19,6 +19,7 @@ const Button = ({
   hideTextOnMobile = false,
   onClick,
 }: ButtonProps) => {
+  const isFlex = !hideTextOnMobile && "flex-1";
   const variantStyle = {
     primary: isCompleted ? "text-white bg-violet-600" : "bg-slate-200",
     secondary: isCompleted ? "bg-lime-300" : "bg-slate-200",
@@ -29,7 +30,7 @@ const Button = ({
     <button
       type={type}
       onClick={onClick}
-      className={`flex flex-1 tablet:flex-none items-center justify-center gap-2 cursor-pointer font-bold
+      className={`flex ${isFlex} tablet:flex-none items-center justify-center gap-2 cursor-pointer font-bold
       h-14 px-6
       border-2 border-slate-900 rounded-3xl
       shadow-[4px_3px_0px_#0F172A]

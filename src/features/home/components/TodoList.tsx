@@ -2,12 +2,7 @@
 import Image from "next/image";
 import EmptyState from "./EmptyState";
 import TodoItem from "./TodoItem";
-
-interface Todo {
-  id: number;
-  name: string;
-  isCompleted: boolean;
-}
+import { Todo } from "../types/todo";
 
 interface PropsType {
   todos: Todo[];
@@ -34,25 +29,28 @@ const TodoList = ({ todos, isCompleted }: PropsType) => {
 
       {filtered.length === 0 && (
         <>
-          {isCompleted && (
-            <EmptyState
-              image="/images/etc/todo-empty-large.png"
-              alt="todo empty"
-            >
-              아직 다 한 일이 없어요.
-              <br />
-              해야 할 일을 체크해보세요!
-            </EmptyState>
-          )}
-
           {!isCompleted && (
             <EmptyState
-              image="/images/etc/done-empty-large.png"
+              width={240}
+              height={240}
+              image="/images/etc/todo-empty-large.svg"
               alt="done empty"
             >
               할 일이 없어요.
               <br />
               TODO를 새롭게 추가해주세요!
+            </EmptyState>
+          )}
+          {isCompleted && (
+            <EmptyState
+              width={240}
+              height={220}
+              image="/images/etc/done-empty-large.svg"
+              alt="todo empty"
+            >
+              아직 다 한 일이 없어요.
+              <br />
+              해야 할 일을 체크해보세요!
             </EmptyState>
           )}
         </>

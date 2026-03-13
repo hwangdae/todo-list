@@ -4,17 +4,9 @@ import DetailHeader from "../components/DetailHeader";
 import ImageUploadBox from "../components/ImageUploadBox";
 import MemoSection from "../components/MemoSection";
 import ActionButton from "../components/ActionButton";
+import { DetailTodo } from "../types/detailTodo";
 
-interface Todo {
-  id: number;
-  name: string;
-  memo: string | null;
-  imageUrl: string | null;
-  isCompleted: boolean;
-  tenantId: string;
-}
-
-const DetailEditor = ({ todo }: { todo: Todo }) => {
+const DetailEditor = ({ todo }: { todo: DetailTodo }) => {
   const [name, setName] = useState(todo.name);
   const [memo, setMemo] = useState(todo.memo);
   const [file, setFile] = useState<File | null>(null);
