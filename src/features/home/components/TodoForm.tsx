@@ -9,7 +9,7 @@ const TodoForm = ({ todosLength }: { todosLength: number }) => {
   const [todo, setTodo] = useState("");
   const router = useRouter();
 
-  // 항목 등록
+  // 추가하기 클릭 시 실행되는 함수
   const todoSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!todo.trim()) {
@@ -41,7 +41,7 @@ const TodoForm = ({ todosLength }: { todosLength: number }) => {
         type="submit"
         icon={<AddTodoIcon fill="#0F172A" />}
         hideTextOnMobile={true}
-        isCompleted={todosLength === 0}
+        isActive={todosLength === 0}
       >
         추가하기
       </Button>

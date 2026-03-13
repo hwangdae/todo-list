@@ -11,12 +11,15 @@ interface PropsType {
 const TodoItem = ({ todo }: PropsType) => {
   const router = useRouter();
 
+  // 완료 여부에 따라 체크박스 아이콘 변경
   const isCheckbox = todo.isCompleted
     ? "/images/icons/completedCheckboxIcon.svg"
     : "/images/icons/checkboxIcon.svg";
 
+  // 완료된 할 일일 경우 배경 색상 변경
   const itemCss = todo.isCompleted ? "bg-violet-100 line-through" : "bg-white";
-
+  
+  // 체크박스 클릭 시 항목 상태 변경 토글
   const handleToggle = async () => {
     await toggleTodo(todo.id, !todo.isCompleted);
     router.refresh();

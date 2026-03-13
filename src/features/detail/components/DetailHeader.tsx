@@ -14,14 +14,17 @@ interface PropsType {
 
 const DetailHeader = ({ name, setName, id, isCompleted }: PropsType) => {
   const router = useRouter();
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false); // 제목 수정 모드 여부
 
+  // 완료 여부에 따라 체크박스 아이콘 변경
   const isCheckbox = isCompleted
     ? "/images/icons/completedCheckboxIcon.svg"
     : "/images/icons/checkboxIcon.svg";
 
+  // 완료된 할 일일 경우 배경 색상 변경
   const HeaderCss = isCompleted ? "bg-violet-100" : "bg-white";
 
+  // 체크박스 클릭 시 항목 상태 변경 토글
   const handleToggle = async () => {
     await toggleTodo(id, !isCompleted);
     router.refresh();
@@ -35,8 +38,8 @@ const DetailHeader = ({ name, setName, id, isCompleted }: PropsType) => {
         <button onClick={handleToggle} className="shrink-0">
           <Image src={isCheckbox} width={32} height={32} alt="checkbox" />
         </button>
-
-        {isEditing ? (
+        {/* 제목 수정 상태일 때 input 표시 */}
+        {isEditing && (
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -47,7 +50,9 @@ const DetailHeader = ({ name, setName, id, isCompleted }: PropsType) => {
             autoFocus
             className="bg-transparent outline-none underline font-bold"
           />
-        ) : (
+        )}
+        {/* 기본 상태에서는 제목 텍스트 표시 */}
+        {!isEditing && (
           <p
             onClick={() => setIsEditing(true)}
             className="font-bold cursor-pointer"

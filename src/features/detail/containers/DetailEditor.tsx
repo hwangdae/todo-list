@@ -13,16 +13,19 @@ const DetailEditor = ({ todo }: { todo: DetailTodo }) => {
 
   return (
     <div className="h-full bg-white py-6 detail-container-padding">
+      {/* 디테일 헤더 */}
       <DetailHeader
         name={name}
         setName={setName}
         id={todo.id}
         isCompleted={todo.isCompleted}
       />
+      {/* 업로드 이미지 + 메모 섹션 */}
       <div className="flex flex-col mb-6 gap-6 desktop:flex-row">
         <ImageUploadBox imageUrl={todo.imageUrl} setFile={setFile} />
         <MemoSection memo={memo} setMemo={setMemo} />
       </div>
+      {/* 수정 완료 + 삭제하기 버튼 */}
       <ActionButton
         id={todo.id}
         isCompleted={todo.isCompleted}

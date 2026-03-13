@@ -24,21 +24,23 @@ const ActionButton = ({
   file,
 }: ActionButtonProps) => {
   const router = useRouter();
+
+  // 항목 업데이트 버튼
   const handleUpdate = async () => {
     let finalImageUrl = imageUrl;
-
+    // 새로운 이미지가 있을 경우 먼저 업로드 진행
     if (file) {
       const res = await uploadImage(file);
       finalImageUrl = res.url;
     }
     try {
-      const res = await updateTodo(id, {
+      await updateTodo(id, {
         name,
         memo: memo ?? "",
         imageUrl: finalImageUrl ?? "",
         isCompleted,
       });
-      console.log(res);
+
       alert("수정이 완료되었습니다.");
       router.push("/");
     } catch (error) {
@@ -47,6 +49,7 @@ const ActionButton = ({
     }
   };
 
+  // 항목 삭제 버튼
   const handleDelete = async () => {
     await deleteTodo(id);
     alert("삭제 되었습니다.");
@@ -60,7 +63,7 @@ const ActionButton = ({
         variant="secondary"
         icon={<EditCompletedIcon />}
         onClick={handleUpdate}
-        isCompleted={isCompleted}
+        isActive={isCompleted}
       >
         수정완료
       </Button>

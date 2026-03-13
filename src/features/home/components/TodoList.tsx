@@ -9,11 +9,14 @@ interface PropsType {
   isCompleted: boolean;
 }
 
+// 할 일 + 완료된 할 일을 나타내는 공통 컴포넌트
 const TodoList = ({ todos, isCompleted }: PropsType) => {
+  // 리스트 상단에 표시할 타이틀 이미지 결정
   const isTodoTitle = isCompleted
     ? "/images/etc/done-title.png"
     : "/images/etc/todo-title.png";
 
+  // 현재 리스트에 해당하는 항목만 필터링
   const filtered = todos.filter((todo) => todo.isCompleted === isCompleted);
 
   return (
@@ -26,7 +29,7 @@ const TodoList = ({ todos, isCompleted }: PropsType) => {
           alt="todo 타이틀 이미지"
         />
       </h1>
-
+      {/* 리스트가 비어있을 경우 빈 상태 표시 */}
       {filtered.length === 0 && (
         <>
           {!isCompleted && (
@@ -55,7 +58,7 @@ const TodoList = ({ todos, isCompleted }: PropsType) => {
           )}
         </>
       )}
-
+      {/* 리스트에 항목이 있을 경우 TodoItem 컴포넌트로 렌더링 */}
       {filtered.length > 0 &&
         filtered.map((todo) => <TodoItem key={todo.id} todo={todo} />)}
     </ul>

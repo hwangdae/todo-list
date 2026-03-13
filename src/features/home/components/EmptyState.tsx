@@ -8,6 +8,7 @@ interface PropsType {
   children: React.ReactNode;
 }
 
+// 할일 + 완료된 할 일이 없을 때 표시되는 이미지 공통 컴포넌트
 const EmptyState = ({ image, width, height, alt, children }: PropsType) => {
   return (
     <div className="flex flex-col items-center gap-4 py-10">
