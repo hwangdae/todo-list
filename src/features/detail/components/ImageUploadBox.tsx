@@ -18,7 +18,7 @@ const ImageUploadBox = ({ imageUrl, setFile }: PropsType) => {
   const [preview, setPreview] = useState<string | null>(null);
 
   // 기존 이미지가 없는지 여부
-  const hasNoImage = imageUrl === null;
+  const hasNoImage = imageUrl === null || imageUrl === "";
 
   // 이미지 존재 여부에 따라 업로드 버튼 스타일 변경
   const imageUpdateCss = hasNoImage
@@ -97,7 +97,7 @@ const ImageUploadBox = ({ imageUrl, setFile }: PropsType) => {
         <button
           type="button"
           onClick={handleClickUpload}
-          className={`flex items-center justify-center w-16 h-16 rounded-full ${imageUpdateCss}`}
+          className={`cursor-pointer flex items-center justify-center w-16 h-16 rounded-full ${imageUpdateCss}`}
         >
           {hasNoImage ? <AddImageIcon /> : <ImageEditIcon />}
         </button>
