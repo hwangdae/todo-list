@@ -34,7 +34,7 @@ const TodoItem = ({ todo }: PropsType) => {
     >
       <div style={{ position: "relative", zIndex: 2 }}>
         <button
-          className="flex items-center"
+          className="cursor-pointer flex items-center"
           aria-label="할 일 체크"
           onClick={handleToggle}
         >
@@ -48,6 +48,7 @@ const TodoItem = ({ todo }: PropsType) => {
       </div>
 
       <button
+      className="cursor-pointer"
         style={{ position: "absolute", inset: "0", opacity: "0" }}
         onClick={() => router.push(`/detail/${todo.id}`)}
       >

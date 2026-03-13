@@ -35,7 +35,7 @@ const DetailHeader = ({ name, setName, id, isCompleted }: PropsType) => {
       className={`w-full flex justify-center border-2 border-slate-900 rounded-3xl py-4 mb-6 ${HeaderCss}`}
     >
       <div className="flex justify-center items-center gap-4 w-full px-6">
-        <button onClick={handleToggle} className="shrink-0">
+        <button onClick={handleToggle} className="cursor-pointer shrink-0">
           <Image src={isCheckbox} width={32} height={32} alt="checkbox" />
         </button>
         {/* 제목 수정 상태일 때 input 표시 */}
