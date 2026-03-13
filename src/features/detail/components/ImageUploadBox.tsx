@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AddImageIcon from "@/public/images/icons/addImageIcon.svg";
 import ImageEditIcon from "@/public/images/icons/imageEditIcon.svg";
 
@@ -17,16 +17,27 @@ const ImageUploadBox = ({ imageUrl, setFile }: PropsType) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
 
-  const urlIsNull = imageUrl === null;
-  const imageUpdateCss = urlIsNull
+  // 기존 이미지가 없는지 여부
+  const hasNoImage = imageUrl === null;
+
+  // 이미지 존재 여부에 따라 업로드 버튼 스타일 변경
+  const imageUpdateCss = hasNoImage
     ? "bg-slate-200"
     : "bg-slate-900/50 border-2 border-slate-900";
 
+  // 메모리 누수 방지
+  useEffect(() => {
+    return () => {
+      if (preview) URL.revokeObjectURL(preview);
+    };
+  }, [preview]);
+
+  // 업로드 버튼 클릭 시 hidden input 클릭
   const handleClickUpload = () => {
     inputRef.current?.click();
   };
 
-  // 업로드 이미지 선택 
+  // 업로드 이미지 선택
   const handleChangeImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -51,7 +62,8 @@ const ImageUploadBox = ({ imageUrl, setFile }: PropsType) => {
   return (
     <div className="relative right-0 bottom-0">
       <div className="flex items-center justify-center w-full desktop:w-[384px] h-[311px] border-dashed border-2 border-slate-300 rounded-3xl bg-slate-50 overflow-hidden">
-        {preview ? (
+        {/* 새로 업로드한 이미지 미리보기 */}
+        {preview && (
           <Image
             src={preview}
             alt="업로드 미리보기 이미지"
@@ -59,7 +71,9 @@ const ImageUploadBox = ({ imageUrl, setFile }: PropsType) => {
             height={311}
             className="object-cover w-full h-full"
           />
-        ) : imageUrl ? (
+        )}
+        {/* 기존 저장된 이미지 표시 */}
+        {!preview && imageUrl && (
           <Image
             src={imageUrl}
             alt="Todo 업로드 이미지"
@@ -67,7 +81,8 @@ const ImageUploadBox = ({ imageUrl, setFile }: PropsType) => {
             height={311}
             className="object-cover w-full h-full"
           />
-        ) : (
+        )}
+        {!preview && !imageUrl && (
           <Image
             src="/images/etc/noImage.svg"
             width={54}
@@ -75,18 +90,18 @@ const ImageUploadBox = ({ imageUrl, setFile }: PropsType) => {
             alt="업로드 이미지 없을 때"
           />
         )}
+        {/* 이미지가 없을 경우 기본 placeholder 이미지 */}
       </div>
-
+      {/* 이미지 업로드 버튼 */}
       <div className="absolute right-4 bottom-4">
         <button
           type="button"
           onClick={handleClickUpload}
           className={`flex items-center justify-center w-16 h-16 rounded-full ${imageUpdateCss}`}
         >
-          {urlIsNull ? <AddImageIcon /> : <ImageEditIcon />}
+          {hasNoImage ? <AddImageIcon /> : <ImageEditIcon />}
         </button>
       </div>
-
       <input
         type="file"
         accept="image/*"

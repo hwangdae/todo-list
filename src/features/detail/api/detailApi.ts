@@ -24,12 +24,8 @@ export const updateTodo = async (
     isCompleted: boolean;
   },
 ) => {
-  try {
-    const res = await api.patch(`/items/${id}`, data);
-    return res.data;
-  } catch (error) {
-    console.log(error);
-  }
+  const res = await api.patch(`/items/${id}`, data);
+  return res.data;
 };
 
 // 이미지 업로드
