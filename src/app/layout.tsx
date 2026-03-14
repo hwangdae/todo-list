@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "../components/layout/Header";
+import QueryProvider from "./QueryProvider";
 
 const nanumSquare = localFont({
   src: [
@@ -31,10 +32,12 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${nanumSquare.className}`}>
-        <Header />
-        <main className="max-w-300 mx-auto h-[calc(100vh-60px)]">
-          {children}
-        </main>
+        <QueryProvider>
+          <Header />
+          <main className="max-w-300 mx-auto h-[calc(100vh-60px)]">
+            {children}
+          </main>
+        </QueryProvider>
       </body>
     </html>
   );

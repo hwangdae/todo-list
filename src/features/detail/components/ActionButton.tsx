@@ -1,10 +1,9 @@
 "use client";
 import Button from "@/src/components/ui/Button";
-import { deleteTodo, updateTodo, uploadImage } from "../api/detailApi";
-import { useRouter } from "next/navigation";
 import EditCompletedIcon from "@/public/images/icons/editCompletedIcon.svg";
 
 import DeleteIcon from "@/public/images/icons/deleteIcon.svg";
+import useTodoActions from "../hooks/useTodoActions";
 
 interface ActionButtonProps {
   id: number;
@@ -23,51 +22,20 @@ const ActionButton = ({
   imageUrl,
   file,
 }: ActionButtonProps) => {
-  const router = useRouter();
 
-  // 항목 업데이트 버튼
-  const handleUpdate = async () => {
-    let finalImageUrl = imageUrl;
-    // 새로운 이미지가 있을 경우 먼저 업로드 진행
-    if (file) {
-      const res = await uploadImage(file);
-      finalImageUrl = res.url;
-    }
-    try {
-      await updateTodo(id, {
-        name,
-        memo: memo ?? "",
-        imageUrl: finalImageUrl ?? "",
-        isCompleted,
-      });
-
-      alert("수정이 완료되었습니다.");
-      router.push("/");
-    } catch (error) {
-      console.log(error);
-      alert("수정 실패. 다시 시도해 주세요.");
-    }
-  };
-
-  // 항목 삭제 버튼
-  const handleDelete = async () => {
-    await deleteTodo(id);
-    alert("삭제 되었습니다.");
-    router.push("/");
-    router.refresh();
-  };
+  const { update, remove } = useTodoActions();
 
   return (
     <div className="flex gap-4 justify-center desktop:justify-end">
       <Button
         variant="secondary"
         icon={<EditCompletedIcon />}
-        onClick={handleUpdate}
+        onClick={() => update({ id, name, memo, imageUrl, isCompleted, file })}
         isActive={isCompleted}
       >
         수정완료
       </Button>
-      <Button variant="danger" icon={<DeleteIcon />} onClick={handleDelete}>
+      <Button variant="danger" icon={<DeleteIcon />} onClick={() => remove(id)}>
         삭제하기
       </Button>
     </div>

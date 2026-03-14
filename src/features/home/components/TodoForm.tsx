@@ -1,14 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { addTodo } from "../api/todoApi";
 import AddTodoIcon from "@/public/images/icons/addTodoIcon.svg";
 import Button from "@/src/components/ui/Button";
-import { useRouter } from "next/navigation";
+import useTodoActions from "../../detail/hooks/useTodoActions";
 
 const TodoForm = ({ todosLength }: { todosLength: number }) => {
   const [todo, setTodo] = useState("");
-  const router = useRouter();
-
+  const { add } = useTodoActions();
+  
   // 추가하기 클릭 시 실행되는 함수
   const todoSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -18,9 +17,7 @@ const TodoForm = ({ todosLength }: { todosLength: number }) => {
     }
 
     try {
-      await addTodo(todo);
-      alert("할 일 등록이 완료되었습니다.");
-      router.refresh();
+      add(todo);
       setTodo("");
     } catch (err) {
       console.log(err);

@@ -1,25 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
 import { getTodos } from "./api/todoApi";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
-import { Todo } from "./types/todo";
+import { useQuery } from "@tanstack/react-query";
 
 const HomePage = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getTodos();
-        setTodos(data);
-      } catch (err) {
-        console.error(err);
-        setTodos([]);
-      }
-    };
-    fetchData();
-  }, []);
+  const { data: todos = [] } = useQuery({
+    queryKey: ["todos"],
+    queryFn: async () => await getTodos(),
+  });
 
   return (
     <div className="pt-6 px-4 container-padding">
